@@ -1,0 +1,146 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #F5F7FA;
+    margin-left: 3%;
+    margin-right: 3%;
+    display: flex;
+    flex-direction: column;
+    min-height: 98vh;
+}
+
+
+
+/* Header */
+header {
+    border-bottom: 3px solid rgb(5, 212, 174);
+    min-width: 100%;
+    min-height: 4vh;
+    margin-top: 30px;
+    display: flex;
+}
+
+#title {
+    margin: 0px;
+}
+
+header button {
+    height: 30px;
+    box-shadow: 10px 5px 5px lightgrey;
+    margin-bottom: 1vh;
+}
+
+#save-product-btn {
+    margin-left: auto;
+    margin-right: 40px;
+    width: 50px;
+}
+
+#cancel-btn {
+    margin-right: 30px;
+}
+
+
+main {
+    flex: 1;
+}
+
+
+#content {
+    margin-left: 1vw;
+    margin-top: 4vh;
+}
+
+#content div {
+    padding-top: 2vh;
+}
+
+.lb {
+    width: 4vw;
+    display: inline-block;
+}
+
+#errorMsg {
+    width: 20vw;
+    display: none;
+    color: #FF0000;
+    border: 1px solid lightgrey;
+
+}
+
+#divTypeSwitcher {
+    margin-top: 3vh;
+}
+
+#lbTypeSwitcher {
+    width: 6.5vw;
+    display: inline-block;
+}
+
+#productType {
+    width: 150px;
+    height: 3vh;
+
+}
+
+#productType option {
+    width: 150px;
+    height: 3vh;
+}
+
+#attribDiv {
+    width: 28vw;
+    min-height: 20vh;
+    background: lightgray;
+    padding-left: 1vw;
+    margin-top: 3vh;
+    
+}
+
+#attribDiv div {
+    padding-left: 1vw;
+    padding-top: 1vh;
+}
+
+.formVariant{
+    margin-top: 1.5vh;
+}
+
+.formVariant input {
+    width: 15vw;
+}
+
+.attribName {
+    padding-top: 1vh;
+    width: 8vw;
+    display: inline-block;
+}
+
+.attribErrorMsg {
+    width: 19vw;
+    margin-top: 2vh;
+    display: inline-block;
+}
+
+
+/* Footer */
+footer {
+    min-height: 5vh;
+    min-width: 100%;
+    border-top: 3px solid rgb(5, 212, 174);
+
+}
+
+#footer-title {
+    margin-left: 50%;
+    font-weight: normal;
+}
