@@ -46,8 +46,7 @@
                             </div>
                             <div> 
                                 <label class="lb">Name:</label>
-                                <input type="text" name="name" id="name" class="checkEmptyString" pattern="[a-zA-Z0-9-]+"  
-                                       title="Please, provide the data of indicated type!" placeholder="Only letters and numbers" >       
+                                <input type="text" name="name" id="name" class="checkEmptyString" placeholder="Product name" >       
                             </div>
                             <div> 
                                 <label class="lb">Price($):</label>
