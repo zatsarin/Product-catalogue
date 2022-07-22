@@ -123,7 +123,8 @@ class SaveProductData
     private $dataArr;
 
     public function setDataToProduct($postSku, $postName, $postPrice, $postProductType, $postWeight, 
-    $postSize, $postHeight,  $postWidth, $postLength){
+    $postSize, $postHeight,  $postWidth, $postLength)
+    {
        
         $classArr = [];
         $classArr[] = new Book();
@@ -133,7 +134,7 @@ class SaveProductData
         $class = $classArr[$_POST["productType"]-1];
 
         $dataArr = [$postSku, $postName, $postPrice, $postProductType, $postWeight, 
-        $postSize, $postHeight,  $postWidth, $postLength];
+                   $postSize, $postHeight,  $postWidth, $postLength];
 
         $class->setAttributesData($dataArr);
    
@@ -178,5 +179,3 @@ class FillndexList
         echo '</div>';
     }
 }
-
-

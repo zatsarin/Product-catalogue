@@ -9,13 +9,15 @@ class Type
     private $connection;
     private $table_name = "product_type_id";
 
-    public function __construct() {
+    public function __construct()
+    {
         $database = new Database();
         $this->connection = $database->getConnection();       
     }
 
     // Read types 
-    function read() {
+    public function read()
+    {
       
         // MySQL query: get values from type «table»
         $query = "SELECT
@@ -33,5 +35,3 @@ class Type
         mysqli_close($this->connection);
     }
 }
-
-?>
