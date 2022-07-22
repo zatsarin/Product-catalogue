@@ -1,15 +1,11 @@
 <?php
 class Database
 {
-
     // account credentials
     private $host = "localhost";
-    private $db_name = "DataBase";
-    // private $db_name = "id19304858_database";
-    
+    private $db_name = "id19308153_database";  
 
-    private $username = "root";
-    // private $username = "id19304858_root";
+    private $username = "id19308153_root";
     private $password = "!NT{gslnhbvrf#369";
     public $conn;
 
@@ -17,8 +13,7 @@ class Database
     public function getConnection()
     {
         $this->conn = null;
-        // $this->conn = new mysqli($host, $username, $password, $db_name);
-        $this->conn = new mysqli("localhost", "root", "!NT{gslnhbvrf#369", "DataBase");
+        $this->conn = new mysqli($this->host , $this->username, $this->password, $this->db_name);
         if (!$this->conn) {
             die("Connection failed: " . mysqli_connect_error());
         } 
