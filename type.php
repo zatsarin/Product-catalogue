@@ -26,7 +26,7 @@ class Type
                     name";
            
         $stmt = $this->connection->query($query);
-        return $stmt;
         mysqli_close($this->connection);
+        return $stmt;
     }
 }
