@@ -2,10 +2,13 @@
 class Database
 {
     // account credentials
+    // private $host = "fdb33.awardspace.net";
+    // private $db_name = " 4148983_database";  
+    // private $username = "4148983_database";
+    // private $password = "!NT{gslnhbvrf#369";
     private $host = "localhost";
-    private $db_name = "id19308153_database";  
-
-    private $username = "id19308153_root";
+    private $db_name = "DataBase";  
+    private $username = "root";
     private $password = "!NT{gslnhbvrf#369";
     public $conn;
 

@@ -1,14 +1,19 @@
 <?php
-
-include_once './product.php';
-
 if ($_POST) {
-    
-    $saveBufferClass = new SaveProductData();
-    $saveBufferClass->setDataToProduct($_POST["sku"], $_POST["name"], $_POST["price"], $_POST["productType"], $_POST["weight"], 
-                                    $_POST["size"], $_POST["height"], $_POST["width"], $_POST["length"]);
 
-    //  To redirect form on a index page
-    header("Location:./index.php");
+    // Connection necessary files
+    include_once "./index.php";
+
+    $classArr = [];
+    $classArr[] = new Book();
+    $classArr[] = new DVD();
+    $classArr[] = new Furniture();
+
+    $class = $classArr[$_POST["productType"]-1];
     
+    $class->setAttributesData($_POST);
+    $class->saveData();
+
+    //  Redirect to index page
+    echo "<script> window.location.replace('./') </script>";
 }

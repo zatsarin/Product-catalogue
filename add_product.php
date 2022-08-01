@@ -13,13 +13,6 @@
 
         <!-- CSS -->
         <link rel="stylesheet" href="./css/add_page_styles.css">
-
-        <!-- PHP -->
-        <?php
-            include_once './product.php';
-            include_once './sql_query.php';
-            include_once './type.php';
-        ?>
     </head>
 
     <body>
@@ -28,12 +21,11 @@
         <header>
             <h2 id="title">Product List</h2>
             <button type="submit" id="save-product-btn" form="product_form" onclick="checkFields()">Save</button>
-            <button id="cancel-btn" onclick="location.href='./index.php'">Cancel</button>
+            <button id="cancel-btn" onclick="location.href='./'">Cancel</button>
         </header>
 
         <!-- Main content -->
         <main>
-
             <form action="create_product.php" method="post"  onsubmit="checkFields();" id="product_form">
                 
                 <div id="content">
@@ -52,28 +44,23 @@
                                 <label class="lb">Price($):</label>
                                 <input type="text" name="price" id="price" class="checkEmptyString" pattern="[0-9]*\.?[0-9]*$"  
                                        title="Please, provide the data of indicated type!" placeholder="Only numbers">
-                            </div>
-                         
+                            </div>                       
                     </div>
                     <div id="divTypeSwitcher">
-                        <label id="lbTypeSwitcher">Type Switcher:</label>
-                      
-                        <?php       
-                        
-                            // read product type
-                            $typeClass = new Type();      
+                        <label id="lbTypeSwitcher">Type Switcher:</label>                     
+                        <?php
+                            // Read product type
+                            $typeClass = new Type();
                             $typeObj = $typeClass->read();
 
-                            // input types in droplist
-                            echo '<select id="productType" name="productType" onchange="handleSelectChange(event)">';                
-                                echo "<option>Type switcher...</option>";   
-                                while ($row_type = $typeObj->fetch_assoc()) {       
-                                    echo "<option value=$row_type[id]>$row_type[name]</option>";
-                                }
-                            echo "</select>";
-                        
+                            // Input types in droplist
+                            echo '<select id="productType" name="productType" onchange="handleSelectChange(event)">';
+                            echo "<option>Type switcher...</option>";
+                            while ($row_type = $typeObj->fetch_assoc()) {
+                                echo "<option value=$row_type[id]>$row_type[name]</option>";
+                            }
+                            echo "</select>";          
                         ?>
-
                     </div>
 
                     <!-- attributes form -->
@@ -84,7 +71,7 @@
                             <label class="attribErrorMsg">Please, provide weight</label>
                         </div>
 
-                        <div class="formVariant" id = "DVD" style="display: none;">
+                        <div class="formVariant" id = "Dvd" style="display: none;">
                             <label class="attribName">Size(MB): </label><input type="text" name="size" id="size" class="" pattern="[0-9]*"  
                                    title="Please, provide the data of indicated type!" placeholder="Only numbers"><br>
                             <label  class="attribErrorMsg">Please, provide size</label>
@@ -103,9 +90,17 @@
                             <label class="attribErrorMsg">Please, provide dimensions in HxWxL format</label>
                         </div>
                     </div>
-                </div>                    
-            </form>
-
+                </div> 
+            </form>       
+            <?php
+                // Read existing sku and save to browser local storage
+                $skuList = SqlData::readExistingSku();
+                echo "
+                    <script language='javascript'>
+                        let skuValuesArr = '".json_encode($skuList)."';
+                        saveSkuToStorage(skuValuesArr);                                   
+                    </script>";
+            ?>
         </main>
 
         <!-- Footer -->

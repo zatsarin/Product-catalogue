@@ -1,9 +1,13 @@
 <?php
 
-include_once './sql_query.php';
-
 if ($_POST) {
+    // Сonnection necessary files
+    include_once "./index.php";
+
     // Delete product
-    $elementSku = $_POST['variable'];
-    SqlData::removeDataSQL($elementSku);
+    $elementsSkuArr = json_decode($_POST['skuValArr']);
+
+    foreach ($elementsSkuArr as $element) {
+        SqlData::removeDataSQL($element);
+    }
 }

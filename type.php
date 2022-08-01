@@ -1,7 +1,7 @@
 <?php
 
-// Connection necessary files  for sql connection
-include_once "./config/database.php";
+// Connection necessary files
+include_once "./index.php";
 
 class Type
 {
@@ -12,14 +12,12 @@ class Type
     public function __construct()
     {
         $database = new Database();
-        $this->connection = $database->getConnection();       
+        $this->connection = $database->getConnection();
     }
 
-    // Read types 
+    // Read types
     public function read()
     {
-      
-        // MySQL query: get values from type «table»
         $query = "SELECT
                     id, name
                 FROM
@@ -28,10 +26,7 @@ class Type
                     name";
            
         $stmt = $this->connection->query($query);
-
         return $stmt;
-
-        // closing connection
         mysqli_close($this->connection);
     }
 }

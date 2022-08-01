@@ -1,7 +1,5 @@
-
 // Delete checked products
 function deleteProducts() {
-
     let cellArr = [];
     let cells = document.getElementsByClassName('cell');
 
@@ -9,23 +7,21 @@ function deleteProducts() {
     for (let i = 0; i < cells.length; i++) {
         let cell = cells[i];
         if (cell.children.length > 0 && cell.children[0].checked) {
-            cellArr.push(cell.children[1].children[0]);
-        }
-
-        // remove elements
-        for (let s = 0; s < cellArr.length; s++) {
-            let elementSku = cellArr[s].textContent;
-            $.ajax({
-                type: 'POST',
-                url: 'delete_product.php',
-                data: { 'variable': elementSku },
-            });
+            cellArr.push(cell.children[1].children[0].textContent);
         }
     }
+
+    let jsonString = JSON.stringify(cellArr);
+
+    $.ajax({
+        type: 'POST',
+        url: 'delete_product.php',
+        data: { 'skuValArr': jsonString },
+    });
+
     // refresh page
     refresh();
 }
-
 
 // Refresh browser window
 function refresh() {
@@ -34,23 +30,18 @@ function refresh() {
     }, 100);
 }
 
-
 // Fill dynamically changed form
 function handleSelectChange(event) {
-
     let selectedElement = event.target;
     let selectedValue = selectedElement.value - 1;
-
-
     let attribDivsBox = document.getElementById("attribDiv");
-
     let attribDiv = attribDivsBox.children[selectedValue];
-
 
     // hide all variant of forms
     for (let i = 0; i < attribDivsBox.childElementCount; i++) {
         attribDivsBox.children[i].style.display = "none";
     }
+
     // make visible selected form variant 
     attribDiv.style.display = "block";
 
@@ -64,14 +55,10 @@ function handleSelectChange(event) {
     for (let b = 0; b < inputsArr.length; b++) {
         inputsArr[b].className = "checkEmptyString";
     }
-
 }
-
-
 
 // Check empty inputs
 function checkFields() {
-
     let attribBox = document.getElementsByClassName("checkEmptyString");
     let select = document.getElementById("productType");
     let msg = document.getElementById("errorMsg");
@@ -88,6 +75,7 @@ function checkFields() {
                 errorArr.push(attribBox[a].name);
             }
         }
+
         // check empty fields
         if (errorArr.length > 0) {
             msg.style.display = "inline-block";
@@ -104,8 +92,7 @@ function checkFields() {
 
             // stop form submit
             event.preventDefault();
-            event.stopPropagation();
-
+            event.stopPropagation()
         }
     } else {
         msg.style.display = "inline-block";
@@ -115,20 +102,12 @@ function checkFields() {
     }
 }
 
-// Save SKU to browser local storage
-function saveSkuToStorage() {
+// Save SKU list to browser local storage
+function saveSkuToStorage(Arr) {
+    let skuValuesArr = JSON.parse(Arr);
     localStorage.clear();
-    let skuValueArr = [];
-    let cells = document.getElementsByClassName('cell');
-    let arr = Array.from(cells);
-    arr.forEach(function (item, i, arr) {
-        skuValueArr.push(item.children[1].children[0].outerText);
-    });
-
-    localStorage.setItem("sku_array", JSON.stringify(skuValueArr));
-
+    localStorage.setItem("sku_array", JSON.stringify(skuValuesArr));
 }
-
 
 // Check SKU existing
 function checkSkuUniq(skuName) {
