@@ -63,11 +63,10 @@ function checkFields() {
     let select = document.getElementById("productType");
     let msg = document.getElementById("errorMsg");
     msg.style.display = "none";
-
-    errorArr = [];
+    let errorArr = [];
 
     // check sku for uniq
-    uniqSkuCode = checkSkuUniq(document.getElementById("sku").value);
+    let uniqSkuCode = checkSkuUniq(document.getElementById("sku").value);
 
     if (uniqSkuCode == false) {
         for (let a = 0; a < attribBox.length; a++) {
@@ -112,7 +111,7 @@ function saveSkuToStorage(Arr) {
 // Check SKU existing
 function checkSkuUniq(skuName) {
     let skuArr = JSON.parse(localStorage.getItem("sku_array"));
-    skuExist = false;
+    let skuExist = false;
     for (let i = 0; i < skuArr.length; i++) {
         if (skuArr[i] == skuName) {
             skuExist = true;
