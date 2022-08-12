@@ -10,7 +10,7 @@ class Book extends Product
     private $str;
     private $formatedStr;
 
-    private function setAttributesData($attributes)
+    public function setAttributesData($attributes)
     {
         $this->sku = $attributes["sku"];
         $this->name = $attributes["name"];
@@ -21,7 +21,7 @@ class Book extends Product
 
     public function saveData($postValues)
     {
-        self::setAttributesData($postValues);
+        $this->setAttributesData($postValues);
         $arrToJson = json_encode([$this->weight]);
         SqlData::setDataSQL([$this->sku, $this->name, $this->price, $this->type, $arrToJson]);
     }

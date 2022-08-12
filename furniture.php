@@ -12,7 +12,7 @@ class Furniture extends Product
     private $length;
 
 
-    private function setAttributesData($attributes)
+    public function setAttributesData($attributes)
     {
         $this->sku = $attributes["sku"];
         $this->name = $attributes["name"];
@@ -25,7 +25,7 @@ class Furniture extends Product
 
     public function saveData($postValues)
     {
-        self::setAttributesData($postValues);
+        $this->setAttributesData($postValues);
         $arrToJson = json_encode([$this->height, $this->width, $this->length]);
         SqlData::setDataSQL([$this->sku, $this->name, $this->price, $this->type, $arrToJson]);
     }
