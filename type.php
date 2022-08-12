@@ -24,7 +24,7 @@ class Type
                     " . $this->table_name . "
                 ORDER BY
                     name";
-           
+
         $stmt = $this->connection->query($query);
         mysqli_close($this->connection);
         return $stmt;

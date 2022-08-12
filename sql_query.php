@@ -8,7 +8,8 @@ class SqlData
     private $arrOfClasses;
     private $classObject;
     private $formatedStr;
-    
+    private $skuValArr;
+
     // Read all data from table "products"
     public static function readDataSQL()
     {
@@ -26,16 +27,20 @@ class SqlData
     }
 
     // Delete data from table "products" by sku
-    public static function removeDataSQL($productSku)
+    public static function removeDataSQL($skuValArr)
     {
         $database = new Database();
         $db = $database->getConnection();
 
-        $sql = "DELETE FROM products WHERE sku = '$productSku'";
-        $result = $db->query($sql);
-        
-        if ($db->query($sql) === false) {
-            die($db->error);
+        $elementsSkuArr = json_decode($skuValArr);
+
+        foreach ($elementsSkuArr as $element) {
+            $sql = "DELETE FROM products WHERE sku = '$element'";
+            $result = $db->query($sql);
+
+            if ($db->query($sql) === false) {
+                die($db->error);
+            }
         }
         mysqli_close($db);
     }
@@ -45,7 +50,7 @@ class SqlData
     {
         $database = new Database();
         $db = $database->getConnection();
-     
+
         $sql = "INSERT INTO products (sku, name, price, type, attributes)
 
             VALUES('$params[0]', '$params[1]', '$params[2]', '$params[3]', '$params[4]')";
