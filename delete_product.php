@@ -4,4 +4,4 @@
 include_once "./index.php";
 
 // Delete product
-SqlData::removeDataSQL($_POST['skuValArr']);
+SqlData::deleteDataSQL($_POST['skuValArr']);

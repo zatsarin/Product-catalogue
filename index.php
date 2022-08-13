@@ -8,7 +8,6 @@ include_once "./furniture.php";
 include_once "./sql_query.php";
 include_once "./type.php";
 include_once "./config/database.php";
-include_once "./chosen_type.php";
 
 // Entrance point
 $uri = $_SERVER['REQUEST_URI'];

@@ -27,7 +27,7 @@ class SqlData
     }
 
     // Delete data from table "products" by sku
-    public static function removeDataSQL($skuValArr)
+    public static function deleteDataSQL($skuValArr)
     {
         $database = new Database();
         $db = $database->getConnection();
@@ -52,7 +52,6 @@ class SqlData
         $db = $database->getConnection();
 
         $sql = "INSERT INTO products (sku, name, price, type, attributes)
-
             VALUES('$params[0]', '$params[1]', '$params[2]', '$params[3]', '$params[4]')";
 
         if ($db->query($sql) === false) {
@@ -74,13 +73,7 @@ class SqlData
             echo "<label>$row[sku]</label>";
             echo "<label>$row[name]</label>";
             echo "<label>$row[price] $</label>";
-
-            $arrOfClasses = [];
-            $arrOfClasses[] = new Book();
-            $arrOfClasses[] = new DVD();
-            $arrOfClasses[] = new Furniture();
-
-            $classObject = $arrOfClasses[$row["type"]-1];
+            $classObject = ProductType::createProductObject($row["type"]);
             $formatedStr = $classObject->getFormatedString($row["attributes"]);
             echo "<label>$formatedStr</label>";
             echo "</div>";
@@ -99,5 +92,21 @@ class SqlData
             $skuArray[] = $row["sku"];
         }
         return $skuArray;
+    }
+
+    // Read types
+    public static function readTypes()
+    {
+        $database = new Database();
+        $db = $database->getConnection();
+
+        $sql = "SELECT id, name FROM product_type_id ORDER BY name";
+
+        $result = $db->query($sql);
+        if ($db->query($sql) === false) {
+            die($db->error);
+        }
+        mysqli_close($db);
+        return $result;
     }
 }

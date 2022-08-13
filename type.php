@@ -3,30 +3,18 @@
 // Connection necessary files
 include_once "./index.php";
 
-class Type
+class ProductType
 {
-    // Connection to database and table name
-    private $connection;
-    private $table_name = "product_type_id";
-
-    public function __construct()
+    private $classArr;
+    private $chosenTypeId;
+    private $class;
+    private $selectedClass;
+    // Create product object by chosen type
+    public static function createProductObject($chosenTypeId)
     {
-        $database = new Database();
-        $this->connection = $database->getConnection();
-    }
-
-    // Read types
-    public function read()
-    {
-        $query = "SELECT
-                    id, name
-                FROM
-                    " . $this->table_name . "
-                ORDER BY
-                    name";
-
-        $stmt = $this->connection->query($query);
-        mysqli_close($this->connection);
-        return $stmt;
+        $classArr = ["Book", "DVD", "Furniture"];
+        $selectedClass = $classArr[$chosenTypeId-1];
+        $class = new $selectedClass();
+        return $class;
     }
 }

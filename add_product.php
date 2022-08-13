@@ -50,8 +50,7 @@
                         <label id="lbTypeSwitcher">Type Switcher:</label>                     
                         <?php
                             // Read product type
-                            $typeClass = new Type();
-                            $typeObj = $typeClass->read();
+                            $typeObj = SqlData::readTypes();
 
                             // Input types in droplist
                             echo '<select id="productType" name="productType" onchange="handleSelectChange(event)">';

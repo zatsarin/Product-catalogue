@@ -10,4 +10,10 @@ abstract class Product
     protected $name;
     protected $price;
     protected $type;
+    // Set properties of object and add it to database
+    public function setAttributesData($attributes) {}
+    // Save object to database
+    public function saveData($postValues) {}
+    // Format description text for index page
+    public function getFormatedString($value) {}
 }
